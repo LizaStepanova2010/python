@@ -1,6 +1,7 @@
 #
 # РАЗДЕЛ ИМПОРТА МОДУЛЕЙ
 #
+from html.entities import name2codepoint
 import random
 #
 #РАЗДЕЛ СОЗДАННЫХ ФУНКЦИЙ
@@ -45,7 +46,7 @@ def intro():
     print()
     print('Человек начал играть, помоги ему')
 
-def proverka (dengi,minStavka):
+def proverka(dengi,minStavka):
     print('сделайте вашу ставку')
     stavka  = input()
     while True:
@@ -66,12 +67,79 @@ def proverka (dengi,minStavka):
             print('надо вводить только цыфры')
             stavka = input()
 
-    return stavka        
+    return stavka
+    
+     
+def sravnenie(game,igrok) :
+    if game == igrok :            
+        sovpdenie = True
+    
+    
+    
+    
+    
+def playAqain():   
+    # создаем бесконечный цикл
+
+    # задаем вопрос и получаем ответ
+     
+    #  проверяем ответ на совподение со следуйщими фразами 
+    # "да", "Да", "ДА", "д", "y", "yes", "Yes", "YES"
+    # если есть совпадение то в переменой пресваеваем значение True
+    
+#  проверяем ответ на совподение со следуйщими фразами 
+    # "нет", "Нет", "НЕТ", "н", "n", "no", "No", "NO"
+    # если есть совпадение то в переменой пресваеваем значение false
+
+    # если с первыми двумя случиями нет
+    # говорим пользевателю, что не поняли его ответа     
+    while True:
+        print ('Хочешь ли ты поиграть еще?')
+        guest =input ()
+        guest = guest . lower()
+        if (guest =="да") or (guest =="д") or (guest =="Да") or (guest =="ДА") or (guest =="y") or (guest =="yes") or (guest =="Yes") or (guest =="YES"): 
+       
+ 
+            return True
+        if (guest == "нет") (guest == "н") (guest =="Нет")  (guest =="НЕТ") (guest == "n")  (guest =="no") (guest =="No")  (guest =="NO":)
+            return False
+        else:
+            print('я не понял ответ.')
+
+
+
+    
+       
 
 #
 # ОСНОВНОЕ ТЕЛО ПРОГРАММЫ 
 #
 
+
 many,minBig = nastroyki()
 intro()
-stavkaIgroka = proverka(many,minBig)            
+while True:
+
+
+
+
+
+    stavkaIgroka = proverka(many,minBig)
+    napG = random .randint (1,3)
+    napI = otvet() 
+    if sravnenie(napG,napI) :
+        print('Поздровляю! Ты выйграл.')
+        many =  many + stavkaIgrka 
+    print('Увы ты проиграл!')
+    if many > minBig
+    # задодим вопрос хочет ли человек сыграть еще
+    if playAqain():
+        print('Хорошо. У вас в наличии '+str(many)+'.Игра будет закончена')
+
+        break
+    else:
+        print('у вас осталось денег меньше минимальной ставки')
+        print('в наличии +str(many)  Игра будет завершена')
+        break
+
+
