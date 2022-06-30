@@ -1,7 +1,6 @@
 #
 # РАЗДЕЛ ИМПОРТА МОДУЛЕЙ
 #
-from html.entities import name2codepoint
 import random
 #
 #РАЗДЕЛ СОЗДАННЫХ ФУНКЦИЙ
@@ -73,9 +72,28 @@ def proverka(dengi,minStavka):
 def sravnenie(game,igrok) :
     if game == igrok :            
         sovpdenie = True
+    else:
+        sovpdenie = False
+        return sovpdenie
     
-    
-    
+def intro2():  
+    print('''яяяяяяя''')
+
+def otvet():
+    print('Введите номер наперсткка:')
+    nap = input()
+    while True:
+        if nap.isdigit():
+            if (nap in '123') and (len(nap)==1):
+                nap = int(nap)
+                break
+            else:
+                print('надо ввести только 1,2 или 3')
+                nap = input()
+        else:
+            print('надо вводить цыфры')
+            nap = input()
+    return nap           
     
     
 def playAqain():   
@@ -95,13 +113,13 @@ def playAqain():
     # говорим пользевателю, что не поняли его ответа     
     while True:
         print ('Хочешь ли ты поиграть еще?')
-        guest =input ()
-        guest = guest . lower()
-        if (guest =="да") or (guest =="д") or (guest =="Да") or (guest =="ДА") or (guest =="y") or (guest =="yes") or (guest =="Yes") or (guest =="YES"): 
+        guest =input()
+        guest = guest.lower()
+        if (guest =="да") or (guest =="д") or  (guest =="y") or (guest =="yes"):
        
  
             return True
-        if (guest == "нет") (guest == "н") (guest =="Нет")  (guest =="НЕТ") (guest == "n")  (guest =="no") (guest =="No")  (guest =="NO":)
+        if (guest == "нет") or (guest == "н") or (guest == "n") or (guest =="no"):
             return False
         else:
             print('я не понял ответ.')
@@ -143,4 +161,3 @@ while True:
         break
 
 
-# lj,fdbkb
