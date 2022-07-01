@@ -14,6 +14,7 @@ def nastroyki():
     print()
     print('версия 1.0')
     print()
+
     print ('Введите сколько денег у игрока денег')
     dengi = input()
     while True:
@@ -77,10 +78,13 @@ def sravnenie(game,igrok) :
         return sovpdenie
     
 def intro2():  
-    print('''яяяяяяя''')
+    print('''После сделанной вами ставки
+ведущий начинает перемещать наперстки.
+
+Остановившись, он говорит:''')
 
 def otvet():
-    print('Введите номер наперсткка:')
+    print('Введите номер наперстка:')
     nap = input()
     while True:
         if nap.isdigit():
@@ -123,41 +127,45 @@ def playAqain():
             return False
         else:
             print('я не понял ответ.')
-
-
-
-    
-       
+def autor():
+    print()
+    print('**********************************************')
+    print('НАПЕРСТКИ')
+    print('Автор:Степанова Лиза')
+    print('Версия  1.0')
+    print('************************************************')
+    print()
 
 #
 # ОСНОВНОЕ ТЕЛО ПРОГРАММЫ 
 #
-
-
+autor()
 many,minBig = nastroyki()
 intro()
 while True:
-
-
-
-
-
     stavkaIgroka = proverka(many,minBig)
+    intro2()
     napG = random .randint (1,3)
     napI = otvet() 
-    if sravnenie(napG,napI) :
+    if sravnenie(napG,napI):
         print('Поздровляю! Ты выйграл.')
-        many =  many + stavkaIgrka 
-    print('Увы ты проиграл!')
-    if many > minBig
-    # задодим вопрос хочет ли человек сыграть еще
-    if playAqain():
-        print('Хорошо. У вас в наличии '+str(many)+'.Игра будет закончена')
+        many =  many + stavkaIgroka
+    else: 
+        print('Увы ты проиграл!')
+        many = many - stavkaIgroka
 
-        break
+    if many > minBig:
+        # задодим вопрос хочет ли человек сыграть еще
+        if playAqain():
+            ('Продолжаем играть. У вас в наличии '+str(many)+'.')
+        else:
+            print('Хорошо. У вас в наличии '+str(many)+'.Игра будет закончена')
+            autor()
+            break
     else:
         print('у вас осталось денег меньше минимальной ставки')
-        print('в наличии +str(many)  Игра будет завершена')
+        print('в наличии ' +str(many)+'. Игра будет завершена')
+        autor()
         break
-
-
+    
+        
