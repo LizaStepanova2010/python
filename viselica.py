@@ -52,67 +52,40 @@ def genVis():
 def genSlov():
     wors = ['аноконда акула белка быки гусь галка жаба журавль зебра змея индейка ирбис кабан кенгуру лама леопард мышь мартышка нанду насорог олень орел павлин панда ревун рысь сайгак скат тигр тюлень уж улитка филин хомяк цапля червяк щука ястеб ящерица'.split()]
     return wors
-    def vyborSlova(spis):
-        indSl = random.randind(0,len(spis)-1)
-        slovo = spis[indSl]
-        return slovo 
+def vyborSlova(spis):
+    indSl = random.randind(0,len(spis)-1)
+    slovo = spis[indSl]
+    return slovo 
 
-def proverka()
+def proverka(strbukv):
     while True:
             print('Введите букву')
             buk = input
             buk = buk.lower()
             if len(buk) != 1:
                 print('Надо ввести только одну букву')
-            elif buk in not in 'йцукенгшщзхъфывапролджэячсмитьбю':
+            elif buk not in 'йцукенгшщзхъфывапролджэячсмитьбю':
                 print('Надо вводить только русские буквы')
-            elif buk in strbukv: 
+            elif buk in strbukv:
                 print('Вы уже назвали эту букву')
-            elif:
+            else:
                 return buk
 
-def displayBoard(nasyVis,errorBuk,yesBuk,sicretSl):
+def displayBoard(nasyVis,errorBuk,esBuky,sicretSl):
     print(nasyVis[len(errorBuk)])
     print()
-    print('Ошибочные буквы:'+errorbuk)
+    print('Ошибочные буквы:'+errorBuk)
     print()
 
     shablon = '_'*len(sicretSl)
-    for i in range len()
 
-    
+    for i in range (len(sicretSl)):
+        if sicretSl(i) in esBuky:
+            shablon = shablon[:1]+sicretSl[:1]+shablon[i+1:]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    for s in shablon:
+        print(s,end=' ')
+    print()
 
 def playAqain():   
     # создаем бесконечный цикл
@@ -144,3 +117,15 @@ def playAqain():
 #
 # ОСНОВНОЕ ТЕЛО ПРОГРАММЫ 
 #
+
+vis = genVis()
+wordsS = genSlov
+sicretSlovo = vyborSlova(wordsS)
+strokaErrorB = ''
+strokaYesB = ''
+
+while True:
+    displayBoard(vis,strokaErrorB,strokaYesB,sicretSlovo)
+    vvedenayaB = proverka(strokaErrorB+strokaYesB)
+
+
