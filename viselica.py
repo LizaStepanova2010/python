@@ -50,26 +50,27 @@ def genVis():
     return HANGMAN_PICT
 
 def genSlov():
-    wors = ['аноконда акула белка быки гусь галка жаба журавль зебра змея индейка ирбис кабан кенгуру лама леопард мышь мартышка нанду насорог олень орел павлин панда ревун рысь сайгак скат тигр тюлень уж улитка филин хомяк цапля червяк щука ястеб ящерица'.split()]
+    wors = 'аноконда акула белка быки гусь галка жаба журавль зебра змея индейка ирбис кабан кенгуру лама леопард мышь мартышка нанду насорог олень орел павлин панда ревун рысь сайгак скат тигр тюлень уж улитка филин хомяк цапля червяк щука ястеб ящерица'.split()
     return wors
+
 def vyborSlova(spis):
-    indSl = random.randind(0,len(spis)-1)
+    indSl = random.randint(0,len(spis)-1)
     slovo = spis[indSl]
     return slovo 
 
 def proverka(strbukv):
     while True:
-            print('Введите букву')
-            buk = input
-            buk = buk.lower()
-            if len(buk) != 1:
-                print('Надо ввести только одну букву')
-            elif buk not in 'йцукенгшщзхъфывапролджэячсмитьбю':
-                print('Надо вводить только русские буквы')
-            elif buk in strbukv:
-                print('Вы уже назвали эту букву')
-            else:
-                return buk
+        print('Введите букву')
+        buk = input()
+        buk = buk.lower()
+        if len(buk) != 1:
+            print('Надо ввести только одну букву')
+        elif buk not in 'йцукенгшщзхъфывапролджэячсмитьбю':
+            print('Надо вводить только русские буквы')
+        elif buk in strbukv:
+            print('Вы уже назвали эту букву')
+        else:
+            return buk
 
 def displayBoard(nasyVis,errorBuk,esBuky,sicretSl):
     print(nasyVis[len(errorBuk)])
@@ -79,9 +80,9 @@ def displayBoard(nasyVis,errorBuk,esBuky,sicretSl):
 
     shablon = '_'*len(sicretSl)
 
-    for i in range (len(sicretSl)):
-        if sicretSl(i) in esBuky:
-            shablon = shablon[:1]+sicretSl[:1]+shablon[i+1:]
+    for i in range(len(sicretSl)):
+        if sicretSl[i] in esBuky:
+            shablon = shablon[:i]+sicretSl[i]+shablon[i+1:]
 
     for s in shablon:
         print(s,end=' ')
@@ -119,13 +120,50 @@ def playAqain():
 #
 
 vis = genVis()
-wordsS = genSlov
+wordsS = genSlov()
 sicretSlovo = vyborSlova(wordsS)
 strokaErrorB = ''
 strokaYesB = ''
+gameOver = False
 
 while True:
     displayBoard(vis,strokaErrorB,strokaYesB,sicretSlovo)
     vvedenayaB = proverka(strokaErrorB+strokaYesB)
+
+    if vvedenayaB in sicretSlovo:
+        strokaYesB = strokaYesB + vvedenayaB
+
+        konerGeme = True
+        for i in range(len(sicretSlovo)):
+            if sicretSlovo[i] not in strokaYesB:
+                konerGeme = False
+                break
+        if konerGeme:
+            print('ДА!Поздравляю!Секретная слово - '+sicretSlovo+'')
+            gameOver = True 
+    else:
+        strokaErrorB = strokaErrorB + vvedenayaB
+
+        if len(strokaErrorB)==len(vis)-1:
+            displayBoard(vis,strokaErrorB,strokaYesB,sicretSlovo)
+            print('''         Вы исчерпали все попытки!
+            Назвоно ошибочных букв: '''+str(len(strokaErrorB))+'''
+            угадоно букв:'''+str(len(strokaYesB))+'''
+            было загадоно слово:'''+sicretSlovo+'.') 
+            gameOver = True
+    if gameOver:
+        if playAqain():
+            sicretSlovo = vyborSlova(wordsS)
+
+            strokaErrorB = ''
+            strokaYesB = ''
+            gameOver = False
+        else:
+            break
+            
+
+            
+
+
 
 
