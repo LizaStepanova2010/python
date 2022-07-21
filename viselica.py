@@ -50,13 +50,45 @@ def genVis():
     return HANGMAN_PICT
 
 def genSlov():
-    wors = 'аноконда акула белка быки гусь галка жаба журавль зебра змея индейка ирбис кабан кенгуру лама леопард мышь мартышка нанду насорог олень орел павлин панда ревун рысь сайгак скат тигр тюлень уж улитка филин хомяк цапля червяк щука ястеб ящерица'.split()
-    return wors
+    wors = {'фрукты':'апельсин мандарин анас банан яблоко арбус дыня барбарис слива груша'.split(),
+        'фигуры':'круг квадрат треугольник овал пятиугольник трапецыя ромб шестиугольник звезда'.split(),
+        'цвета':'красный оранжавый желтый зеленый голубой синий фиолетовый белый коричневый'.split(),
+        'животные':'аноконда акула белка быки гусь галка жаба журавль зебра змея индейка ирбис кабан кенгуру лама леопард мышь мартышка нанду насорог олень орел павлин панда ревун рысь сайгак скат тигр тюлень уж улитка филин хомяк цапля червяк щука ястеб ящерица'.split()}
+    return wors 
 
-def vyborSlova(spis):
-    indSl = random.randint(0,len(spis)-1)
-    slovo = spis[indSl]
-    return slovo 
+def vyborSlova(spis,uS):
+    if uS == 'Л':
+        for i in range(len(list(spis.keys()))):
+            print('Для выбора категории '+list(spis.keys())[i]+'ведите '+str(i))
+        
+    while True:
+        katSlov = input()
+        if not katSlov.isdigit():
+            print('ввидите только цыфры')
+        else:
+            katSlov = int(katSlov)
+            if katSlov > len(list(spis.keys())):
+                print('вы ввели неверное число')
+            else:
+                 break
+        kategoriya = list(spis.keys())[katSlov]
+    else:
+        kategoriya = random.choice (list(spis.keys()))
+    indexSlov = random.randint(0,len(spis(kategoriya))-1)
+    return[spis[kategoriya][indexSlov],kategoriya]
+def vyborUs():
+    while True:
+        print('Выберите уровень сложности')
+        print('Выберите "Л" для легкого уровня')
+        print('Выберите "С" для среднего  уровня')
+        print('Выберите "Т" для трудного уровня')
+        uroven = input ()
+        uroven = uroven. upper() 
+        if len (uroven) != 1:
+            print('Надо вводить только один символ.')
+        elif uroven not in 'ЛСТ':
+            return uroven
+
 
 def proverka(strbukv):
     while True:
@@ -72,7 +104,9 @@ def proverka(strbukv):
         else:
             return buk
 
-def displayBoard(nasyVis,errorBuk,esBuky,sicretSl):
+def displayBoard(nasyVis,errorBuk,esBuky,sicretSl, urS, KS):
+    if urS in 'ЛС':
+        print(KS)
     print(nasyVis[len(errorBuk)])
     print()
     print('Ошибочные буквы:'+errorBuk)
@@ -121,10 +155,14 @@ def playAqain():
 
 vis = genVis()
 wordsS = genSlov()
-sicretSlovo = vyborSlova(wordsS)
+
 strokaErrorB = ''
 strokaYesB = ''
 gameOver = False
+
+urovenSL = vyborUs()
+sicretSlovo,katSL = vyborSlova(wordsS,urovenSL)
+
 
 while True:
     displayBoard(vis,strokaErrorB,strokaYesB,sicretSlovo)
@@ -153,7 +191,8 @@ while True:
             gameOver = True
     if gameOver:
         if playAqain():
-            sicretSlovo = vyborSlova(wordsS)
+            urovenSL = vyborUs()
+            sicretSlovo,katSL = vyborSlova(wordsS,urovenSL)
 
             strokaErrorB = ''
             strokaYesB = ''
