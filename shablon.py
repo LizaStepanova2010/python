@@ -1,6 +1,7 @@
 #
 # РАЗДЕЛ ИМПОРТА МОДУЛЕЙ
 #
+from curses.ascii import isdigit
 import random
 #
 #РАЗДЕЛ СОЗДАННЫХ ФУНКЦИЙ
@@ -30,7 +31,11 @@ def nastroyki():
     while True:
         if minStavka.isdigit():
             minStavka = int(minStavka)
-            break
+            if minStavka > dengi:
+                print('Минимальная ставка не может быть больше имеющихся денег. Прошу вновь ввести ставку.')
+                minStavka = input()
+            else:  
+                break
         else:
             print('Надо вводить только цыфры')
             minStavka = input()
@@ -38,11 +43,11 @@ def nastroyki():
     return [dengi,minStavka]
 
 def intro():
-    print('Шел один человик на рынок,и сидел один без породуктов')
+    print('Шел один человик на рынок,а другой сидел без продуктов')
     print()
     print('но у него было 3 наперстка и маленький шарик.')
     print
-    print('Ему захотелось подойти к человеку и он рещает проверить свою удачу и сыграть на деньги. ')
+    print('Ему захотелось подойти к человеку и он решает проверить свою удачу и сыграть на деньги. ')
     print()
     print('Человек начал играть, помоги ему')
 
@@ -70,12 +75,12 @@ def proverka(dengi,minStavka):
     return stavka
     
      
-def sravnenie(game,igrok) :
+def sravnenie(game,igrok):
     if game == igrok :            
         sovpdenie = True
     else:
         sovpdenie = False
-        return sovpdenie
+    return sovpdenie
     
 def intro2():  
     print('''После сделанной вами ставки
@@ -146,6 +151,7 @@ while True:
     stavkaIgroka = proverka(many,minBig)
     intro2()
     napG = random .randint (1,3)
+    print(random .randint (1,3))
     napI = otvet() 
     if sravnenie(napG,napI):
         print('Поздровляю! Ты выйграл.')
@@ -155,7 +161,8 @@ while True:
         many = many - stavkaIgroka
 
     if many > minBig:
-        # задодим вопрос хочет ли человек сыграть еще
+        # задала
+        # им вопрос хочет ли человек сыграть еще
         if playAqain():
             ('Продолжаем играть. У вас в наличии '+str(many)+'.')
         else:

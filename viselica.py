@@ -59,23 +59,24 @@ def genSlov():
 def vyborSlova(spis,uS):
     if uS == 'Л':
         for i in range(len(list(spis.keys()))):
-            print('Для выбора категории '+list(spis.keys())[i]+'ведите '+str(i))
+            print('Для выбора категории '+list(spis.keys())[i]+' ведите '+str(i))
         
-    while True:
-        katSlov = input()
-        if not katSlov.isdigit():
-            print('ввидите только цыфры')
-        else:
-            katSlov = int(katSlov)
-            if katSlov > len(list(spis.keys())):
-                print('вы ввели неверное число')
+        while True:
+            katSlov = input()
+            if not katSlov.isdigit():
+                print('ввидите только цыфры')
             else:
-                 break
+                katSlov = int(katSlov)
+                if katSlov > len(list(spis.keys())):
+                    print('вы ввели неверное число')
+                else:
+                    break
         kategoriya = list(spis.keys())[katSlov]
     else:
         kategoriya = random.choice (list(spis.keys()))
-    indexSlov = random.randint(0,len(spis(kategoriya))-1)
-    return[spis[kategoriya][indexSlov],kategoriya]
+
+    indexSlova = random.randint(0,len(spis[kategoriya])-1)
+    return[spis[kategoriya][indexSlova],kategoriya]
 def vyborUs():
     while True:
         print('Выберите уровень сложности')
@@ -83,10 +84,12 @@ def vyborUs():
         print('Выберите "С" для среднего  уровня')
         print('Выберите "Т" для трудного уровня')
         uroven = input ()
-        uroven = uroven. upper() 
+        uroven = uroven.upper() 
         if len (uroven) != 1:
             print('Надо вводить только один символ.')
         elif uroven not in 'ЛСТ':
+            print('Надо вводить только Л,С или Т')
+        else:
             return uroven
 
 
@@ -165,7 +168,7 @@ sicretSlovo,katSL = vyborSlova(wordsS,urovenSL)
 
 
 while True:
-    displayBoard(vis,strokaErrorB,strokaYesB,sicretSlovo)
+    displayBoard(vis,strokaErrorB,strokaYesB,sicretSlovo,urovenSL,katSL)
     vvedenayaB = proverka(strokaErrorB+strokaYesB)
 
     if vvedenayaB in sicretSlovo:
